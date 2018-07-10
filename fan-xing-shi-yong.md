@@ -2,7 +2,7 @@ Java泛型（generics）是JDK 5中引入的一个新特性, 泛型提供了**�
 
 ### 自定义泛型
 
-* [ ] 泛型类
+> 泛型类
 
 ```
 public class Generic<T>{ 
@@ -19,7 +19,7 @@ public class Generic<T>{
 }
 ```
 
-* [ ] 泛型接口
+> 泛型接口
 
 ```
 public interface Generator<T> {
@@ -27,7 +27,7 @@ public interface Generator<T> {
 }
 ```
 
-* [ ] 泛型方法
+> 泛型方法
 
 * 静态
 
@@ -51,13 +51,13 @@ public class Generic{
 
 ### 泛型使用
 
-* [ ] 普通使用
+> 普通使用
 
 ```
 Generator<String>
 ```
 
-* [ ] 继承使用
+> 继承使用
 
 * 固定类型
 
@@ -71,7 +71,7 @@ public class Son extends Generic<String>{}
 public class Son extends Generic<T>{}
 ```
 
-* [ ] 泛型通配符
+> 泛型通配符
 
 * &lt;?&gt;
 
@@ -90,10 +90,6 @@ Generic<? extends Father>
 ```
 Generic<? super Son>
 ```
-
-
-
-
 
 
 
