@@ -16,8 +16,8 @@ public @interface Description {
 }
 ```
 
-* **@Target（作用目标） **ElementType枚举当中定义了作用目标：TYPE，接口、类、枚举、注解；FIELD，字段、枚举的常量；METHOD，方法；PARAMETER，方法参数；CONSTRUCTOR，构造函数；LOCAL\_VARIABLE，局部变量；ANNOTATION\_TYPE；注解；PACKAGE，包。
-* **@Retention（保留策略）**RetentionPolicy枚举当中定义了保留策略：SOURCE，注解仅存在于源码中；CLASS， 默认的保留策略，在class字节码文件中存在，但运行时无法获得；RUNTIME，在class字节码文件中存在，在运行时可以通过反射获取到。
+* **@Target（作用目标）**   ElementType枚举当中定义了作用目标：TYPE，接口、类、枚举、注解；FIELD，字段、枚举的常量；METHOD，方法；PARAMETER，方法参数；CONSTRUCTOR，构造函数；LOCAL\_VARIABLE，局部变量；ANNOTATION\_TYPE；注解；PACKAGE，包。
+* **@Retention（保留策略）**   RetentionPolicy枚举当中定义了保留策略：SOURCE，注解仅存在于源码中；CLASS， 默认的保留策略，在class字节码文件中存在，但运行时无法获得；RUNTIME，在class字节码文件中存在，在运行时可以通过反射获取到。
 * **@Inherited（可被子类继承）**
 * **@Document（将包含在文档当中）**
 
@@ -41,7 +41,7 @@ public String Color() {
 ### JDK实现的注解
 
 * **@Override**   Target为ElementType.METHOD；Retention为RetentionPolicy.SOURCE，由编译解析该注解。
-* **@Deprecated   **Target为CONSTRUCTOR, FIELD, LOCAL\_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE；Retention为RetentionPolicy.RUNTIME，由JVM解析该注解
+* **@Deprecated**   Target为CONSTRUCTOR, FIELD, LOCAL\_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE；Retention为RetentionPolicy.RUNTIME，由JVM解析该注解
 * **@SuppressWarnings**   Target为TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL\_VARIABLE；Retention为RetentionPolicy.SOURCE，由编译器解析该注解。
 
 
