@@ -40,9 +40,9 @@ public String Color() {
 
 ### JDK实现的注解
 
-* **@Override** Target为ElementType.METHOD；Retention为RetentionPolicy.SOURCE。
-* **@Deprecated **Target为CONSTRUCTOR, FIELD, LOCAL\_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE；Retention为RetentionPolicy.RUNTIME。
-* **@SuppressWarnings**   Target为TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL\_VARIABLE；Retention为RetentionPolicy.SOURCE
+* **@Override**   Target为ElementType.METHOD；Retention为RetentionPolicy.SOURCE，由编译解析该注解。
+* **@Deprecated   **Target为CONSTRUCTOR, FIELD, LOCAL\_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE；Retention为RetentionPolicy.RUNTIME，由JVM解析该注解
+* **@SuppressWarnings**   Target为TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL\_VARIABLE；Retention为RetentionPolicy.SOURCE，由编译器解析该注解。
 
 
 
