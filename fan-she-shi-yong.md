@@ -78,6 +78,8 @@ Annotation[] ans = O.class.getAnnotations();
 
 ## 类加载机制
 
+反射是解析和获取已经加载到内存的类信息，而将类加载到内存就需要类加载器，如Class.forName\(\)是默认先调用了类加载器将类加载到内存，然后再获取其Class对象，如下forName0\(className, true, ClassLoader.getClassLoader\(Reflection.getCallerClass\(\)\)\)。new对象则是默认调用线程中setContextClassLoader方法指定的加载器。
+
 
 
 ## 动态代理
