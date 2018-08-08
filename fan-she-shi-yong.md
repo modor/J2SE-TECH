@@ -153,7 +153,98 @@ public class Main {
 
 ## 动态代理
 
+动态代理是在程序运行时，运用反射机制动态创建而成的代理访问类。**JDK只提供了针对接口生成代理，故不能只针对某一个类生成代理。如果需要为某一个类实现一个代理的话，考虑使用CGLIB等第三方字节码（一种字节码增强技术）。**
 
+### 动态代理应用一：数据源连接池屏蔽close\(\)方法
+
+* 自定义连接池
+
+```
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+public class MyDataSource {
+    static int size = 10;
+    private static List<Connection> pool = Collections.synchronizedList(new LinkedList<Connection>());
+    static {
+        for (int i = 0; i < size; i++) {
+            Connection conn = JDBCUtil.getConnection();
+            pool.add(conn);
+        }
+    }
+
+    public static Connection getConnection() {
+        final Connection conn = pool.remove(0);
+        Connection proxyConn = (Connection) Proxy.newProxyInstance(conn.getClass().getClassLoader(), conn.getClass()
+                .getInterfaces(), new InvocationHandler() {
+
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                // TODO Auto-generated method stub
+                Object retValue = null;
+                if ("close".equals(method.getName())) {
+                    pool.add(conn);
+                } else {
+                    retValue = method.invoke(conn, args);
+                }
+                return retValue;
+            }
+        });
+        return proxyConn;
+    }
+    
+    public static int getSize() {
+        return pool.size();
+    }
+}
+```
+
+* 连接池使用
+
+```
+Connection conn = MyDataSource.getConnection();
+......
+conn.close();
+```
+
+### 动态代理应用二：给业务层增加事务控制
+
+```
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+
+public class BeanFactory {
+    public static CustomerService getCustomerService() {
+        final CustomerService customerService = new CustomerServiceImpl();
+        CustomerService cs = (CustomerService) Proxy.newProxyInstance(cs.getClass().getClassLoader(), cs.getClass()
+                .getInterfaces(), new InvocationHandler() {
+
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                // TODO Auto-generated method stub
+                try {
+                    TransactionManager.beginTransaction();
+                    Object retValue = method.invoke(cs, args);
+                    TransactionManager.commit();
+                    return retValue;
+                } catch (Exception e) {
+                    TransactionManager.rollback();
+                    throw new RuntimeException(e);
+                } finally {
+
+                }
+            }
+        });
+        return cs;
+    }
+}
+```
 
 
 
