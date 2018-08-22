@@ -16,5 +16,6 @@
 * [RMI教程](rmijiao-cheng.md)
 * [JMX教程](jmxjiao-cheng.md)
 * [LOG日志](logri-zhi.md)
+* [CORBA教程](corbajiao-cheng.md)
 * [JDK工具](jdkgong-ju.md)
 
