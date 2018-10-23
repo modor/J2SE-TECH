@@ -197,7 +197,7 @@ public class MyDataSource {
         });
         return proxyConn;
     }
-    
+
     public static int getSize() {
         return pool.size();
     }
